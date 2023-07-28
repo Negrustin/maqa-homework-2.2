@@ -1,0 +1,1 @@
+[![Android CI](https://github.com/Negrustin/maqa-homework-2.2/actions/workflows/android.yml/badge.svg)](https://github.com/Negrustin/maqa-homework-2.2/actions/workflows/android.yml)
