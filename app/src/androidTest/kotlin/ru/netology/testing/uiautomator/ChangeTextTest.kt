@@ -110,6 +110,64 @@ class ChangeTextTest {
         assertEquals(result, textToSet)
     }
 
+    @Test
+    fun shouldNotChangeTextAfterEnteringEmptyText() {
+        val packageName = MODEL_PACKAGE
+        waitForPackage(packageName)
+
+
+        device.findObject(By.res(packageName, "userInput")).text = textToSet
+        device.findObject(By.res(packageName, "buttonChange")).click()
+
+        device.findObject(By.res(packageName, "userInput")).text = ""
+        device.findObject(By.res(packageName, "buttonChange")).click()
+
+
+
+
+        val result = device.findObject(By.res(packageName, "textToBeChanged")).text
+        assertEquals(result, textToSet)
+    }
+
+    @Test
+    fun shouldNotChangeTextAfterEnteringSpace() {
+        val packageName = MODEL_PACKAGE
+        waitForPackage(packageName)
+
+
+        device.findObject(By.res(packageName, "userInput")).text = textToSet
+        device.findObject(By.res(packageName, "buttonChange")).click()
+
+        device.findObject(By.res(packageName, "userInput")).text = " "
+        device.findObject(By.res(packageName, "buttonChange")).click()
+
+
+
+
+        val result = device.findObject(By.res(packageName, "textToBeChanged")).text
+        assertEquals(result, textToSet)
+    }
+
+
+
+
+    @Test
+    fun testNewActivity() {
+        val packageName = MODEL_PACKAGE
+        waitForPackage(packageName)
+
+        val userInputObject = device.findObject(By.res(packageName, "userInput"))
+        userInputObject.text = textToSet
+
+        device.findObject(By.res(packageName, "buttonActivity")).click()
+        device.wait(Until.hasObject(By.pkg(packageName).depth(0)), TIMEOUT)
+
+        val newTextElement = device.findObject(By.res(packageName, "text"))
+        val resultText = newTextElement.text
+
+        assertEquals(textToSet, resultText)
+    }
+
 }
 
 
